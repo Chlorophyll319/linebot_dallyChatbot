@@ -1,5 +1,10 @@
+// 我要查天氣
+// 1.每日天氣預報
+// 2.紫外線
+// 3.空氣品質
+
 // 接 外部連結 的套件
-import axios from "axios";
+// import axios from "axios";
 
 // 串api
 // 寫在try{...}catch{...}
