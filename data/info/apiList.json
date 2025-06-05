@@ -1,0 +1,112 @@
+{
+  "天氣預報": [
+    {
+      "apiName": "鄉鎮天氣預報-台灣未來1週天氣預報API",
+      "url": "https://opendata.cwa.gov.tw/api/v1/rest/datastore/F-D0047-091?Authorization=rdec-key-123-45678-011121314"
+    },
+    {
+      "apiName": "鄉鎮天氣預報-台灣未來3天天氣預報API",
+      "url": "https://opendata.cwa.gov.tw/api/v1/rest/datastore/F-D0047-089?Authorization=rdec-key-123-45678-011121314"
+    },
+    {
+      "apiName": "鄉鎮天氣預報-臺北市未來3天天氣預報API",
+      "url": "https://opendata.cwa.gov.tw/api/v1/rest/datastore/F-D0047-089?Authorization=rdec-key-123-45678-011121314"
+    },
+    {
+      "apiName": "天氣特報-各別天氣警特報之內容及所影響之區域API",
+      "url": "https://opendata.cwa.gov.tw/api/v1/rest/datastore/W-C0033-002?Authorization=rdec-key-123-45678-011121314"
+    },
+    {
+      "apiName": "現在天氣觀測報告API",
+      "url": "https://opendata.cwa.gov.tw/fileapi/v1/opendataapi/O-A0003-001?Authorization=rdec-key-123-45678-011121314&format=JSON"
+    },
+    {
+      "apiName": "一般天氣預報-今明36小時天氣預報API",
+      "url": "https://opendata.cwa.gov.tw/api/v1/rest/datastore/F-C0032-001?Authorization=rdec-key-123-45678-011121314"
+    },
+    {
+      "apiName": "自動雨量站-雨量觀測資料API",
+      "url": "https://opendata.cwa.gov.tw/api/v1/rest/datastore/O-A0002-001?Authorization=rdec-key-123-45678-011121314"
+    },
+    {
+      "apiName": "健康氣象-熱傷害指數及警示全台各鄉鎮五日逐三小時預報API",
+      "url": "https://opendata.cwa.gov.tw/api/v1/rest/datastore/M-A0085-001?Authorization=rdec-key-123-45678-011121314"
+    },
+    {
+      "apiName": "健康氣象冷傷害指數及警示全臺各鄉鎮五日預報API",
+      "url": "https://opendata.cwa.gov.tw/api/v1/rest/datastore/F-A0085-002?Authorization=rdec-key-123-45678-011121314"
+    },
+    {
+      "apiName": "健康氣象冷傷害指數及警示全臺各鄉鎮未來72小時逐3小時預報API",
+      "url": "https://opendata.cwa.gov.tw/api/v1/rest/datastore/F-A0085-003?Authorization=rdec-key-123-45678-011121314"
+    },
+    {
+      "apiName": "健康氣象-溫差提醒指數及警示全臺各鄉鎮五日預報API",
+      "url": "https://opendata.cwa.gov.tw/api/v1/rest/datastore/F-A0085-004?Authorization=rdec-key-123-45678-011121314"
+    },
+    {
+      "apiName": "健康氣象-溫差提醒指數及警示全臺各鄉鎮未來72小時逐3小時預報API",
+      "url": "https://opendata.cwa.gov.tw/api/v1/rest/datastore/F-A0085-005?Authorization=rdec-key-123-45678-011121314"
+    },
+    {
+      "apiName": "自動氣象站-氣象觀測資料API",
+      "url": "https://opendata.cwa.gov.tw/api/v1/rest/datastore/O-A0001-001?Authorization=rdec-key-123-45678-011121314"
+    }
+  ],
+  "紫外線": [
+    {
+      "apiName": "紫外線指數-每日紫外線指數最大值API",
+      "url": "https://opendata.cwa.gov.tw/api/v1/rest/datastore/O-A0005-001?Authorization=rdec-key-123-45678-011121314"
+    }
+  ],
+  "放假日": [
+    {
+      "apiName": "政府行政機關辦公日曆表CSV",
+      "url": "https://data.ntpc.gov.tw/api/datasets/308dcd75-6434-45bc-a95f-584da4fed251/csv/file"
+    },
+    {
+      "apiName": "天然災害停止上班、停止上課情形",
+      "url": "https://alerts.ncdr.nat.gov.tw/RssAtomFeed.ashx?AlertType=33"
+    }
+  ],
+  "空氣品質": [
+    {
+      "apiName": "空氣品質指標(AQI)JSON",
+      "url": "https://data.moenv.gov.tw/api/v2/aqx_p_432?api_key=58d6040c-dca7-407f-a244-d0bfdfa8144a&limit=1000&sort=ImportDate%20desc&format=JSON"
+    },
+    {
+      "apiName": "空氣品質預報資料JSON",
+      "url": "https://data.moenv.gov.tw/api/v2/aqf_p_01?api_key=540e2ca4-41e1-4186-8497-fdd67024ac44&limit=1000&sort=publishtime%20desc&format=JSON"
+    },
+    {
+      "apiName": "日空氣品質指標(AQI)JSON",
+      "url": "https://data.moenv.gov.tw/api/v2/aqx_p_434?api_key=e8dd42e6-9b8b-43f8-991e-b3dee723a52d&limit=1000&sort=monitordate%20desc&format=JSON"
+    },
+    {
+      "apiName": "空氣品質監測日最大值JSON",
+      "url": "https://data.moenv.gov.tw/api/v2/aqx_p_304?api_key=9b651a1b-0732-418e-b4e9-e784417cadef&limit=1000&sort=monitordate%20desc&format=JSON"
+    },
+    {
+      "apiName": "空氣品質指標(AQI)(歷史資料)JSON",
+      "url": "https://data.moenv.gov.tw/api/v2/aqx_p_488?api_key=221974dd-667c-4243-b308-61b60bc29986&limit=1000&sort=datacreationdate%20desc&format=JSON"
+    },
+    {
+      "apiName": "空氣品質監測月值JSON",
+      "url": "https://data.moenv.gov.tw/api/v2/aqx_p_08?api_key=9e565f9a-84dd-4e79-9097-d403cae1ea75&limit=1000&sort=monitormonth%20desc&format=JSON"
+    }
+  ],
+  "地震": [
+    {
+      "apiName": "顯著有感地震報告API",
+      "url": "https://opendata.cwa.gov.tw/api/v1/rest/datastore/E-A0015-001?Authorization=rdec-key-123-45678-011121314"
+    },
+    {
+      "apiName": "縣市行政區觀測震度資料JSON",
+      "url": "https://opendata.cwa.gov.tw/fileapi/v1/opendataapi/E-A0015-005?Authorization=rdec-key-123-45678-011121314&downloadType=WEB&format=JSON"
+    },
+    {
+      "apiName": "小區域有感地震報告API",
+      "url": "https://opendata.cwa.gov.tw/api/v1/rest/datastore/E-A0016-001?Authorization=rdec-key-123-45678-011121314"
+    }
+  ]
+}
