@@ -8,6 +8,7 @@ const bot = linebot({
   channelAccessToken: process.env.CHANNEL_ACCESS_TOKEN,
 });
 
+// 黛栗啟動
 bot.listen("/", 3000, () => {
   console.log("(呆栗測試中)呆栗聽到你在呼喚呆栗喔，呆栗已經起來ㄌ٩(ˊ〇ˋ*)و");
 });
