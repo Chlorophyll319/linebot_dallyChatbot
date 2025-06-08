@@ -1,217 +1,108 @@
 // mvp功能
 // 匯入區
-import axios from "axios";
-import apiList from "../data/info/apiList.json";
+import { buildApi } from "../Library/tool.js";
+import getApiList from "../data/info/apiList.js";
 
-// ??是否需要return
-// ??可以export那麼多東西嗎@@ 我依稀記得好像什麼時候可以很多個麼時候只能一個來著@@
+const apiList = getApiList();
+console.log(apiList);
 
-// 鄉鎮天氣預報-台灣未來1週天氣預報API
-export async function 全台1W天氣預報() {
-  try {
-    const url = apiList["天氣預報"][0].url;
-    const api = await axios.get(url);
-    console.log(apiList["天氣預報"][0].apiName);
-    return api.data;
-  } catch (err) {
-    console.log(err.message);
-    console.log(apiList["天氣預報"][0].apiName);
-    console.log("救命啊，有🐛");
-    return null;
-  }
-}
+const Name = "天氣預報";
 
-// 鄉鎮天氣預報-台灣未來3天天氣預報API
-export async function 全台3D天氣預報() {
-  try {
-    const url = apiList["天氣預報"][1].url;
-    const api = await axios.get(url);
-    console.log(apiList["天氣預報"][1].apiName);
-    return api.data;
-  } catch (err) {
-    console.log(err.message);
-    console.log(apiList["天氣預報"][1].apiName);
-    console.log("救命啊，有🐛");
-    return null;
-  }
-}
+export const 全台1W平均 = buildApi(Name, 0);
+console.log("全台1W平均");
 
-// 鄉鎮天氣預報-臺北市未來3天天氣預報API
-export async function 台北市3D天氣預報() {
-  try {
-    const url = apiList["天氣預報"][2].url;
-    const api = await axios.get(url);
-    console.log(apiList["天氣預報"][2].apiName);
-    return api.data;
-  } catch (err) {
-    console.log(err.message);
-    console.log(apiList["天氣預報"][2].apiName);
-    console.log("救命啊，有🐛");
-    return null;
-  }
-}
+export const 全台3D天氣預報 = buildApi(Name, 1);
+console.log("全台3D天氣預報");
 
-// 天氣特報-各別天氣警特報之內容及所影響之區域API
-export async function 天氣警報() {
-  try {
-    const url = apiList["天氣預報"][3].url;
-    const api = await axios.get(url);
-    console.log(apiList["天氣預報"][3].apiName);
-    return api.data;
-  } catch (err) {
-    console.log(err.message);
-    console.log(apiList["天氣預報"][3].apiName);
-    console.log("救命啊，有🐛");
-    return null;
-  }
-}
+export const 臺北3D天氣預報 = buildApi(Name, 2);
+console.log("臺北3D天氣預報");
 
-// 現在天氣觀測報告API
-export async function 現在天氣() {
-  try {
-    const url = apiList["天氣預報"][4].url;
-    const api = await axios.get(url);
-    console.log(apiList["天氣預報"][4].apiName);
-    return api.data;
-  } catch (err) {
-    console.log(err.message);
-    console.log(apiList["天氣預報"][4].apiName);
-    console.log("救命啊，有🐛");
-    return null;
-  }
-}
+export const 天氣警報 = buildApi(Name, 3);
+console.log("天氣警報");
 
-// 一般天氣預報-今明36小時天氣預報API
-export async function 今明36H天氣預報() {
-  try {
-    const url = apiList["天氣預報"][5].url;
-    const api = await axios.get(url);
-    console.log(apiList["天氣預報"][5].apiName);
-    return api.data;
-  } catch (err) {
-    console.log(err.message);
-    console.log(apiList["天氣預報"][5].apiName);
-    console.log("救命啊，有🐛");
-    return null;
-  }
-}
+export const 現在天氣 = buildApi(Name, 4);
+console.log("現在天氣");
 
-// 自動雨量站-雨量觀測資料API
-export async function 雨量觀測() {
-  try {
-    const url = apiList["天氣預報"][6].url;
-    const api = await axios.get(url);
-    console.log(apiList["天氣預報"][6].apiName);
-    return api.data;
-  } catch (err) {
-    console.log(err.message);
-    console.log(apiList["天氣預報"][6].apiName);
-    console.log("救命啊，有🐛");
-    return null;
-  }
-}
+export const 今明36H天氣預報 = buildApi(Name, 5);
+console.log("今明36H天氣預報");
 
-// 健康氣象-熱傷害指數及警示全台各鄉鎮五日逐三小時預報API
-export async function 熱傷害5D() {
-  try {
-    const url = apiList["天氣預報"][7].url;
-    const api = await axios.get(url);
-    console.log(apiList["天氣預報"][7].apiName);
-    return api.data;
-  } catch (err) {
-    console.log(err.message);
-    console.log(apiList["天氣預報"][7].apiName);
-    console.log("救命啊，有🐛");
-    return null;
-  }
-}
+export const 雨量觀測 = buildApi(Name, 6);
+console.log("雨量觀測");
 
-// 健康氣象冷傷害指數及警示全臺各鄉鎮五日預報API
-export async function 冷傷害5D() {
-  try {
-    const url = apiList["天氣預報"][8].url;
-    const api = await axios.get(url);
-    console.log(apiList["天氣預報"][8].apiName);
-    return api.data;
-  } catch (err) {
-    console.log(err.message);
-    console.log(apiList["天氣預報"][8].apiName);
-    console.log("救命啊，有🐛");
-    return null;
-  }
-}
+export const 熱傷害5D = buildApi(Name, 7);
+console.log("熱傷害5D");
 
-// 健康氣象冷傷害指數及警示全臺各鄉鎮未來72小時逐3小時預報API
-export async function 冷傷害72H() {
-  try {
-    const url = apiList["天氣預報"][9].url;
-    const api = await axios.get(url);
-    console.log(apiList["天氣預報"][9].apiName);
-    return api.data;
-  } catch (err) {
-    console.log(err.message);
-    console.log(apiList["天氣預報"][9].apiName);
-    console.log("救命啊，有🐛");
-    return null;
-  }
-}
+export const 冷傷害5D = buildApi(Name, 8);
+console.log("冷傷害5D");
 
-// 健康氣象-溫差提醒指數及警示全臺各鄉鎮五日預報API
-export async function 溫差提醒5D() {
-  try {
-    const url = apiList["天氣預報"][10].url;
-    const api = await axios.get(url);
-    console.log(apiList["天氣預報"][10].apiName);
-    return api.data;
-  } catch (err) {
-    console.log(err.message);
-    console.log(apiList["天氣預報"][10].apiName);
-    console.log("救命啊，有🐛");
-    return null;
-  }
-}
+export const 冷傷害72H = buildApi(Name, 9);
+console.log("冷傷害72H");
 
-// 健康氣象-溫差提醒指數及警示全臺各鄉鎮未來72小時逐3小時預報API
-export async function 溫差提醒72H() {
-  try {
-    const url = apiList["天氣預報"][11].url;
-    const api = await axios.get(url);
-    console.log(apiList["天氣預報"][11].apiName);
-    return api.data;
-  } catch (err) {
-    console.log(err.message);
-    console.log(apiList["天氣預報"][11].apiName);
-    console.log("救命啊，有🐛");
-    return null;
-  }
-}
+export const 溫差提醒5D = buildApi(Name, 10);
+console.log("溫差提醒5D");
 
-// 自動氣象站-氣象觀測資料API
-export async function 自動氣象站() {
-  try {
-    const url = apiList["天氣預報"][12].url;
-    const api = await axios.get(url);
-    console.log(apiList["天氣預報"][12].apiName);
-    return api.data;
-  } catch (err) {
-    console.log(err.message);
-    console.log(apiList["天氣預報"][12].apiName);
-    console.log("救命啊，有🐛");
-    return null;
-  }
-}
+export const 溫差提醒72H = buildApi(Name, 11);
+console.log("溫差提醒72H");
 
-// 紫外線指數-每日紫外線指數最大值API
-export async function 紫外線指數() {
-  try {
-    const url = apiList["天氣預報"][13].url;
-    const api = await axios.get(url);
-    console.log(apiList["天氣預報"][13].apiName);
-    return api.data;
-  } catch (err) {
-    console.log(err.message);
-    console.log(apiList["天氣預報"][13].apiName);
-    console.log("救命啊，有🐛");
-    return null;
-  }
-}
+export const 自動氣象站 = buildApi(Name, 12);
+console.log("自動氣象站");
+
+export const 大區域7D = buildApi(Name, 13);
+console.log("大區域7D");
+
+export const 台北小幫手 = buildApi(Name, 14);
+console.log("台北小幫手");
+
+export const 花蓮小幫手 = buildApi(Name, 15);
+console.log("花蓮小幫手");
+
+export const 桃園小幫手 = buildApi(Name, 16);
+console.log("桃園小幫手");
+
+export const 新竹小幫手 = buildApi(Name, 17);
+console.log("新竹小幫手");
+
+export const 屏東小幫手 = buildApi(Name, 18);
+console.log("屏東小幫手");
+
+export const 彰化小幫手 = buildApi(Name, 19);
+console.log("彰化小幫手");
+
+export const 雲林小幫手 = buildApi(Name, 20);
+console.log("雲林小幫手");
+
+export const 連江小幫手 = buildApi(Name, 21);
+console.log("連江小幫手");
+
+export const 新北小幫手 = buildApi(Name, 22);
+console.log("新北小幫手");
+
+export const 高雄小幫手 = buildApi(Name, 23);
+console.log("高雄小幫手");
+
+export const 金門小幫手 = buildApi(Name, 24);
+console.log("金門小幫手");
+
+export const 嘉義小幫手 = buildApi(Name, 25);
+console.log("嘉義小幫手");
+
+export const 苗栗小幫手 = buildApi(Name, 26);
+console.log("苗栗小幫手");
+
+export const 台中小幫手 = buildApi(Name, 27);
+console.log("台中小幫手");
+
+export const 新竹縣小幫手 = buildApi(Name, 28);
+console.log("新竹縣小幫手");
+
+export const 臺東小幫手 = buildApi(Name, 29);
+console.log("臺東小幫手");
+
+export const 今明36H = buildApi(Name, 30);
+console.log("今明36H");
+
+export const 一週各縣市 = buildApi(Name, 31);
+console.log("一週各縣市");
+
+export const 全球都市 = buildApi(Name, 32);
+console.log("全球都市");

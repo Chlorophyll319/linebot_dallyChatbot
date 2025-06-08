@@ -6,7 +6,6 @@ import getApiList from "../data/info/apiList.js";
 const apiList = getApiList();
 console.log(apiList);
 
-const Name = "放假日";
+const Name = "紫外線";
 
-export const 辦公日曆表 = buildApi(Name, 0);
-export const 天災停班停課 = buildApi(Name, 1);
+export const 紫外線指數 = buildApi(Name, 0);
