@@ -27,6 +27,7 @@ export function buildApi(apiGroup, i) {
   return async function () {
     try {
       const theApiUrl = await axios.get(url);
+      console.log("👉 取得的資料內容是", theApiUrl.data);
       return theApiUrl.data;
     } catch (err) {
       console.log("救命啊，有🐛", `取得 ${apiName} 失敗：${err.message}`);
