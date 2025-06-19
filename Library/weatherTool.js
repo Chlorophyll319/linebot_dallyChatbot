@@ -69,44 +69,88 @@ export function parseTwAweek(userSet) {
 
 export function splitByDate(dataObj) {
   // 已整理後的資料存放區，key為日期
-  // { key日期: {  凌晨: index,白天: index,晚上: index  } ;};
-  const weatherObj = {};
+  // [ date: "日期", part: {  "凌晨": index,"白天": index,"晚上": index  } ;];
+  const weatherMap = {}; // 暫存（中繼）
+  const weatherArr = []; // 最終輸出
+
   // 1. 索引 0 ~ 13 每一筆都取出
   for (let i = 0; i < dataObj.time.length; i++) {
     let index = i;
     // 只留下前十個字為 年月日 .slice(0,10)
     let startDate = dataObj.time[i].startTime.slice(0, 10);
     let endDate = dataObj.time[i].endTime.slice(0, 10);
+
     // 2. 初始化資料結構
     // 每個日期先放三個欄位，值為null
-    if (!weatherObj[startDate]) {
-      weatherObj[startDate] = { 凌晨: null, 白天: null, 夜晚: null };
+    if (!weatherMap[startDate]) {
+      weatherMap[startDate] = { 凌晨: null, 白天: null, 夜晚: null };
     }
-    if (!weatherObj[endDate]) {
-      weatherObj[endDate] = { 凌晨: null, 白天: null, 夜晚: null };
+    if (!weatherMap[endDate]) {
+      weatherMap[endDate] = { 凌晨: null, 白天: null, 夜晚: null };
     }
 
     // 3. 依照 開始時間 與 結束時間 排序
     // - 開始時間 與 結束時間 一致 為 該天 早上
     // - 開始時間 與 結束時間 不一致 開始時間 為該天凌晨；結束時間 為該天晚上
     if (startDate === endDate) {
-      weatherObj[startDate]["白天"] = index;
+      weatherMap[startDate]["白天"] = index;
     } else {
-      weatherObj[startDate]["夜晚"] = index;
-      weatherObj[endDate]["凌晨"] = index;
+      weatherMap[startDate]["夜晚"] = index;
+      weatherMap[endDate]["凌晨"] = index;
     }
   }
-  return weatherObj;
+  // 轉成陣列
+  for (const date in weatherMap) {
+    weatherArr.push({
+      date,
+      parts: weatherMap[date],
+    });
+  }
+  return weatherArr;
 }
 
 // ------------------------------//
 // 2. 資料重組（組裝）
-// function reformTwAweek() {}
+// 每天的資料
+export function reformTwAweekByDay(
+  splitByDateArr,
+  wxArray,
+  minTArray,
+  maxTArray
+) {
+  let botSay = "";
+  for (const { date, parts } of splitByDateArr) {
+    botSay += `${date} 天氣預報\n`;
+    botSay += reformTwAweekByTime(parts, wxArray, minTArray, maxTArray);
+    botSay += `\n`;
+  }
+  return botSay;
+}
+
+// 每天的資料之處理三個時段
+export function reformTwAweekByTime(parts, wxArray, minTArray, maxTArray) {
+  let botSayContent = "";
+  for (const step of ["凌晨", "白天", "夜晚"]) {
+    const index = parts[step];
+    if (index === null) {
+      botSayContent += `📍${step}：🈲\n`;
+      continue;
+    }
+    // const index = ;
+    const WX = wxArray.time[index]?.parameter?.parameterName || "❓";
+    const MAX = maxTArray.time[index]?.parameter?.parameterName || "?";
+    const MIN = minTArray.time[index]?.parameter?.parameterName || "?";
+
+    botSayContent += `📍${step}：天氣 ${WX}，溫度在 ${MIN}度 ~ ${MAX}度 之間\n`;
+  }
+  return botSayContent;
+}
 
 // 各縣市小幫手系列
 // 1. 格式化
 // 2. 資料重組
 
+/*
 // ※測試用 function： A.抓出使用者ID的預設城市的與API的對應索引 B.從來源API中抓預設城市的資訊 C.分割整理各項目（天氣現象/最高溫/最低溫）資訊，以日期為 D.整理檔案
 async function testFunc() {
   const raw = await 一週各縣市();
@@ -115,17 +159,20 @@ async function testFunc() {
   const stepA = userInfo(userCity, raw);
   // B. 取得該城市的天氣資訊
   const stepB = parseTwAweek(stepA);
-  // console.log("stepB (parseTwAweek):", stepB);
+  console.log(`stepB (parseTwAweek):${stepB}`);
+  console.dir(stepB, { depth: null });
   // C. 以日期分割整理 Wx/MinT/MaxT
-  const wxByDate = splitByDate(stepB.wxArray);
-  console.log("wxByDate:", wxByDate);
-  // const minTByDate = splitByDate(stepB.minTArray);
-  // const maxTByDate = splitByDate(stepB.maxTArray);
-  // console.log("minTByDate:", minTByDate);
-  // console.log("maxTByDate:", maxTByDate);
+  const stepC = splitByDate(stepB.wxArray);
+  console.log("stepC （splitByDate(stepB.wxArray)）:", stepC);
   // D. 合併（物件）
-  // const stepD = reformTwAweek(stepC);
-  // console.log("stepD (reformTwAweek):", stepD);
+  const stepD = reformTwAweekByDay(
+    stepC,
+    stepB.wxArray,
+    stepB.minTArray,
+    stepB.maxTArray
+  );
+  console.log("stepD (reformTwAweek):", stepD);
 }
 
 testFunc();
+*/
