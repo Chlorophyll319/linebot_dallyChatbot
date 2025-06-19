@@ -1,6 +1,6 @@
 // mvp功能
 // 天氣預報
-import { 一週各縣市 } from "../api/weatherApi.js";
+// import { 一週各縣市 } from "../api/weatherApi.js";
 // 天氣預報api各城市對照
 import { cityIndex } from "../Data/info/weatherApiCityIndex.js";
 // 小機器人話術

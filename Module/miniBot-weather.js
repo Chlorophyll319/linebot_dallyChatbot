@@ -1,3 +1,15 @@
+import {
+  userInfo,
+  parseTwAweek,
+  splitByDate,
+  reformTwAweekByDay,
+  // eslint-disable-next-line no-unused-vars
+  reformTwAweekByTime,
+} from "../Library/weatherTool.js";
+// eslint-disable-next-line no-unused-vars
+import sheetDB from "../friends/sheetDB.js";
+import { 一週各縣市 } from "../api/weatherApi.js";
+
 // mvp功能
 // 匯入整理後api資料
 
@@ -33,6 +45,28 @@
 
 從今天算往後七天的天氣預報即可
 */
+export async function Aweek() {
+  const userCity = "新北市";
+  const raw = await 一週各縣市();
+
+  // A. 取得預設城市的 API 對應索引
+  const stepA_userSet = userInfo(userCity, raw);
+  // B. 取得該城市的天氣資訊
+  const stepB_userSetCityWeather = parseTwAweek(stepA_userSet);
+
+  // C. 以日期分割整理 Wx/MinT/MaxT
+  const stepC_dateInfo = splitByDate(stepB_userSetCityWeather.wxArray);
+  // D. 合併（物件）
+  const stepD_theBotSay = reformTwAweekByDay(
+    stepC_dateInfo,
+    stepB_userSetCityWeather.wxArray,
+    stepB_userSetCityWeather.minTArray,
+    // eslint-disable-next-line prettier/prettier
+    stepB_userSetCityWeather.maxTArray
+  );
+
+  return stepD_theBotSay;
+}
 
 /*
 小幫手系列（Api）
