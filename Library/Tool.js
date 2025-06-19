@@ -20,14 +20,14 @@ export function buildApi(apiGroup, i) {
   }
 
   const { url, apiName, apiFunc, fileFormat } = group[i];
-  console.log(`💪準備抓這支👉 ${apiName}`);
-  console.log(`實際上這支預計的func名字👉 ${apiFunc}`);
-  console.log(`實際上這支檔案格式👉 ${fileFormat}`);
+  // console.log(`💪準備抓這支👉 ${apiName}`);
+  // console.log(`實際上這支預計的func名字👉 ${apiFunc}`);
+  // console.log(`實際上這支檔案格式👉 ${fileFormat}`);
 
   return async function () {
     try {
       const theApiUrl = await axios.get(url);
-      console.log("👉 取得的資料內容是", theApiUrl.data);
+      // console.log("👉 取得的資料內容是", theApiUrl.data);
       return theApiUrl.data;
     } catch (err) {
       console.log("救命啊，有🐛", `取得 ${apiName} 失敗：${err.message}`);

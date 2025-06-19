@@ -1,4 +1,4 @@
-const weatherTalkMap = {
+export const weatherTalkMap = {
   1: "🌞 這種大太陽…我不會融化吧？出門記得戴帽子！",
   2: "🌤️ 有點雲擋一下太陽，勉強能接受啦。",
   3: "⛅ 陽光偶爾冒出頭…我還是想躲起來。",
@@ -41,5 +41,3 @@ const weatherTalkMap = {
   41: "⛈️🌫️ 你以為會打雷就夠了？再送你一層霧！",
   42: "❄️❄️❄️ 下雪還不夠，還有冰還有暴風，你要出門嗎？",
 };
-
-export default weatherTalkMap;

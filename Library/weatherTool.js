@@ -1,7 +1,10 @@
 // mvp功能
+// 天氣預報
 import { 一週各縣市 } from "../api/weatherApi.js";
-import { Setting } from "../Data/info/friends.js";
+// 天氣預報api各城市對照
 import { cityIndex } from "../Data/info/weatherApiCityIndex.js";
+// 小機器人話術
+import { weatherTalkMap } from "../Data/miniBotPhrases/weather/weatherTalkMap.js";
 
 /**
  * @property {Object} raw 原始資料
@@ -34,25 +37,95 @@ import { cityIndex } from "../Data/info/weatherApiCityIndex.js";
  */
 
 // 全台一週天氣預報
-// 格式化（洗資料、拆資料）
-/* function parseTwAweek(Setting, raw) {
-  // 抓這名使用者的預設城市
-  const 
+// 1. 格式化（洗資料、拆資料）
+// - 使用者預設
+export function userInfo(userCity, raw) {
+  // 使用者預設城市index
+  const x = cityIndex[userCity];
   // 根據使用者資料之預設地點抓出對應的index
-  const local = cwaopendata.dataset.location[];
+  return raw.cwaopendata.dataset.location[x]; // 陣列
+}
 
-  // 預定 return 內容
-  return "窩不行了";
-} */
-// 資料重組（組裝）
+// - 提取地名與 Wx / MinT / MaxT 結構
+export function parseTwAweek(userSet) {
+  // 地點
+  const userPlace = userSet.locationName;
+  // 天氣現象 wx
+  const wxArray = userSet.weatherElement[0];
+  // 最高溫
+  const maxTArray = userSet.weatherElement[1];
+  // 最低溫
+  const minTArray = userSet.weatherElement[2];
+
+  return {
+    userPlace,
+    wxArray,
+    minTArray,
+    maxTArray,
+  };
+}
+
+// - 切分時間工具成物件
+
+export function splitByDate(dataObj) {
+  // 已整理後的資料存放區，key為日期
+  // { key日期: {  凌晨: index,白天: index,晚上: index  } ;};
+  const weatherObj = {};
+  // 1. 索引 0 ~ 13 每一筆都取出
+  for (let i = 0; i < dataObj.time.length; i++) {
+    let index = i;
+    // 只留下前十個字為 年月日 .slice(0,10)
+    let startDate = dataObj.time[i].startTime.slice(0, 10);
+    let endDate = dataObj.time[i].endTime.slice(0, 10);
+    // 2. 初始化資料結構
+    // 每個日期先放三個欄位，值為null
+    if (!weatherObj[startDate]) {
+      weatherObj[startDate] = { 凌晨: null, 白天: null, 夜晚: null };
+    }
+    if (!weatherObj[endDate]) {
+      weatherObj[endDate] = { 凌晨: null, 白天: null, 夜晚: null };
+    }
+
+    // 3. 依照 開始時間 與 結束時間 排序
+    // - 開始時間 與 結束時間 一致 為 該天 早上
+    // - 開始時間 與 結束時間 不一致 開始時間 為該天凌晨；結束時間 為該天晚上
+    if (startDate === endDate) {
+      weatherObj[startDate]["白天"] = index;
+    } else {
+      weatherObj[startDate]["夜晚"] = index;
+      weatherObj[endDate]["凌晨"] = index;
+    }
+  }
+  return weatherObj;
+}
+
+// ------------------------------//
+// 2. 資料重組（組裝）
+// function reformTwAweek() {}
 
 // 各縣市小幫手系列
-// 格式化
-// 資料重組
+// 1. 格式化
+// 2. 資料重組
 
-// 測試用 function：印出一週各縣市 API 的全部內容
-async function testPrintAllWeekWeather() {
-  const data = await 一週各縣市();
-  return console.log("一週各縣市內容：", data.cwaopendata.dataset.location);
+// ※測試用 function： A.抓出使用者ID的預設城市的與API的對應索引 B.從來源API中抓預設城市的資訊 C.分割整理各項目（天氣現象/最高溫/最低溫）資訊，以日期為 D.整理檔案
+async function testFunc() {
+  const raw = await 一週各縣市();
+  const userCity = "新北市";
+  // A. 取得預設城市的 API 對應索引
+  const stepA = userInfo(userCity, raw);
+  // B. 取得該城市的天氣資訊
+  const stepB = parseTwAweek(stepA);
+  // console.log("stepB (parseTwAweek):", stepB);
+  // C. 以日期分割整理 Wx/MinT/MaxT
+  const wxByDate = splitByDate(stepB.wxArray);
+  console.log("wxByDate:", wxByDate);
+  // const minTByDate = splitByDate(stepB.minTArray);
+  // const maxTByDate = splitByDate(stepB.maxTArray);
+  // console.log("minTByDate:", minTByDate);
+  // console.log("maxTByDate:", maxTByDate);
+  // D. 合併（物件）
+  // const stepD = reformTwAweek(stepC);
+  // console.log("stepD (reformTwAweek):", stepD);
 }
-console.log(testPrintAllWeekWeather());
+
+testFunc();
